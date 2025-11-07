@@ -1,10 +1,12 @@
 AWS SysOps Administrator Associate (SOA-C02) Exam Study Guide
 
 
-## Study materials:
+## Study materials: 
+Exam Guide - https://d1.awsstatic.com/training-and-certification/docs-sysops-associate/AWS-Certified-SysOps-Administrator-Associate_Exam-Guide.pdf 
 
+Udemy Course - https://www.udemy.com/share/101XFw3@YdZgheQ0UzsxdelVsbzOdYMUP_zFu8rwqOkOJ4_56JfjNB30Ku8fY2LWK7f-JTGzzA==/ 
 
-
+Practice Exams - https://www.udemy.com/share/108XII3@yc_F6um92H6R8eP2W7ADdTLtYL7OBSeCdBMaSe-BJiB5679ZvlRiZNsEdXS9YoRBSQ==/
 
 ## Domain 1: Monitoring, Logging, and Remediation
 
