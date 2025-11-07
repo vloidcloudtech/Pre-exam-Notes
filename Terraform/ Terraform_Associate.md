@@ -2,6 +2,18 @@ Terraform Associate
 
 ## Study Materials
 
+Exam Details - https://developer.hashicorp.com/certifications/infrastructure-automation
+
+Exam objectives - https://developer.hashicorp.com/terraform/tutorials/certification-003/associate-review-003
+
+Learning path - https://developer.hashicorp.com/terraform/tutorials/certification-003/associate-study-003
+
+Video Course - https://www.udemy.com/share/103Omm3@oVwe9Jq5ouoe-xNlot31iQUaB-nkMSVnCtQqTumQ15U49iv4EgyqwB4550KMOI2O6g==/
+
+Alternate Video Course - https://www.udemy.com/share/105BNW3@iheBEJZsfJFn2W6aosX6nwP656R_7cm1azDIuTARYOhEix1dNhxWz6oG2GjA-MxAcA==/
+
+Practice Exam - https://www.udemy.com/share/102Zak3@fM9jpcLNkDTtQQKWeuJzkfMgX8qqjTIIZ4-2Lah48r0-w8jBXswr2kVKpA3gCWvE0Q==/
+
 
 
 
