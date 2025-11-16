@@ -16,6 +16,207 @@ class KubectlQuiz:
         self.score = 0
         self.total_questions = 0
         self.session_history = []
+        self.improvement_tips = self.load_improvement_tips()
+
+    def load_improvement_tips(self) -> Dict[str, Dict]:
+        """Load improvement tips for each category"""
+        return {
+            "Pod Management": {
+                "tips": [
+                    "Practice the 'kubectl run' command with different flags",
+                    "Master the --dry-run=client -o yaml pattern for generating manifests",
+                    "Understand pod lifecycle states and commands that affect them",
+                    "Learn shorthand notations: po=pods, -A=--all-namespaces"
+                ],
+                "resources": [
+                    "kubectl run --help",
+                    "kubernetes.io/docs/reference/kubectl/cheatsheet/"
+                ]
+            },
+            "Deployments": {
+                "tips": [
+                    "Understand the difference between 'kubectl run' and 'kubectl create deployment'",
+                    "Practice rollout commands: status, history, undo, restart",
+                    "Master the 'kubectl set image' command syntax",
+                    "Learn how to scale deployments and manage replicas"
+                ],
+                "resources": [
+                    "kubectl rollout --help",
+                    "kubectl set --help"
+                ]
+            },
+            "Services": {
+                "tips": [
+                    "Understand the three main service types: ClusterIP, NodePort, LoadBalancer",
+                    "Practice 'kubectl expose' with different types",
+                    "Learn the difference between port, targetPort, and nodePort",
+                    "Master service YAML generation with --dry-run=client -o yaml"
+                ],
+                "resources": [
+                    "kubectl expose --help",
+                    "kubectl create service --help"
+                ]
+            },
+            "ConfigMaps": {
+                "tips": [
+                    "Practice creating ConfigMaps from literals, files, and directories",
+                    "Understand --from-literal vs --from-file vs --from-env-file",
+                    "Learn how to mount ConfigMaps as volumes or environment variables",
+                    "Remember: ConfigMaps are for non-sensitive configuration data"
+                ],
+                "resources": [
+                    "kubectl create configmap --help"
+                ]
+            },
+            "Secrets": {
+                "tips": [
+                    "Know the different secret types: generic, docker-registry, tls",
+                    "Practice creating secrets with --from-literal and --from-file",
+                    "Understand base64 encoding in secrets",
+                    "Learn the specific flags for docker-registry secrets"
+                ],
+                "resources": [
+                    "kubectl create secret --help",
+                    "kubectl create secret generic --help"
+                ]
+            },
+            "Namespaces": {
+                "tips": [
+                    "Practice switching between namespaces with kubectl config set-context",
+                    "Understand namespace-scoped vs cluster-scoped resources",
+                    "Learn the -n flag to specify namespace in commands",
+                    "Master creating and deleting namespaces"
+                ],
+                "resources": [
+                    "kubectl create namespace --help",
+                    "kubectl config --help"
+                ]
+            },
+            "Labels": {
+                "tips": [
+                    "Master the -l/--selector flag for filtering resources",
+                    "Practice adding, removing, and overwriting labels",
+                    "Understand label selector syntax: key=value, key!=value, key in (v1,v2)",
+                    "Learn to use multiple labels with commas (AND logic)"
+                ],
+                "resources": [
+                    "kubectl label --help",
+                    "kubectl get --help (look for --selector)"
+                ]
+            },
+            "Nodes": {
+                "tips": [
+                    "Understand cordon vs drain vs uncordon",
+                    "Practice node tainting with different effects: NoSchedule, PreferNoSchedule, NoExecute",
+                    "Learn how to drain nodes safely with --ignore-daemonsets and --delete-emptydir-data",
+                    "Master checking node status and conditions"
+                ],
+                "resources": [
+                    "kubectl cordon --help",
+                    "kubectl drain --help",
+                    "kubectl taint --help"
+                ]
+            },
+            "Debugging": {
+                "tips": [
+                    "Master 'kubectl logs' with flags: -f, --previous, -c, --tail",
+                    "Practice 'kubectl exec -it' for interactive debugging",
+                    "Learn 'kubectl describe' to see events and detailed info",
+                    "Understand 'kubectl cp' for file transfer between pods and local"
+                ],
+                "resources": [
+                    "kubectl logs --help",
+                    "kubectl exec --help",
+                    "kubectl describe --help"
+                ]
+            },
+            "RBAC": {
+                "tips": [
+                    "Understand Role vs ClusterRole, RoleBinding vs ClusterRoleBinding",
+                    "Practice creating roles with specific verbs and resources",
+                    "Master 'kubectl auth can-i' for testing permissions",
+                    "Learn to use --as flag for impersonation testing"
+                ],
+                "resources": [
+                    "kubectl create role --help",
+                    "kubectl create rolebinding --help",
+                    "kubectl auth can-i --help"
+                ]
+            },
+            "Resources": {
+                "tips": [
+                    "Practice 'kubectl top' for monitoring resource usage",
+                    "Understand requests vs limits for CPU and memory",
+                    "Learn resource notation: m for millicores, Mi/Gi for memory",
+                    "Master 'kubectl set resources' for updating resource constraints"
+                ],
+                "resources": [
+                    "kubectl top --help",
+                    "kubectl set resources --help"
+                ]
+            },
+            "Output": {
+                "tips": [
+                    "Master JSONPath syntax: .items[*], .metadata.name, .status.podIP",
+                    "Practice custom-columns format: HEADER:.jsonpath",
+                    "Learn common output formats: -o yaml, -o json, -o wide, -o name",
+                    "Understand --sort-by with JSONPath expressions"
+                ],
+                "resources": [
+                    "kubectl get --help (look for -o/--output)",
+                    "kubernetes.io/docs/reference/kubectl/jsonpath/"
+                ]
+            },
+            "Storage": {
+                "tips": [
+                    "Understand PV (cluster-scoped) vs PVC (namespace-scoped)",
+                    "Learn PV access modes: ReadWriteOnce, ReadOnlyMany, ReadWriteMany",
+                    "Practice checking PV/PVC status and bindings",
+                    "Master storage class concepts"
+                ],
+                "resources": [
+                    "kubectl get pv --help",
+                    "kubectl get pvc --help"
+                ]
+            },
+            "Networking": {
+                "tips": [
+                    "Practice viewing network policies (netpol)",
+                    "Understand service discovery and DNS in Kubernetes",
+                    "Learn to use -o wide for additional networking info",
+                    "Master endpoint inspection with 'kubectl get endpoints'"
+                ],
+                "resources": [
+                    "kubectl get networkpolicies --help",
+                    "kubectl get endpoints --help"
+                ]
+            },
+            "Jobs": {
+                "tips": [
+                    "Understand Job vs CronJob use cases",
+                    "Practice cron schedule syntax: */1 * * * * (minute hour day month weekday)",
+                    "Learn job completion and parallelism settings",
+                    "Master job cleanup and history limits"
+                ],
+                "resources": [
+                    "kubectl create job --help",
+                    "kubectl create cronjob --help"
+                ]
+            },
+            "Advanced": {
+                "tips": [
+                    "Master 'kubectl patch' with JSON and strategic merge patches",
+                    "Practice 'kubectl replace --force' for resource recreation",
+                    "Learn 'kubectl port-forward' for local debugging",
+                    "Understand 'kubectl apply' vs 'kubectl create' vs 'kubectl replace'"
+                ],
+                "resources": [
+                    "kubectl patch --help",
+                    "kubectl port-forward --help",
+                    "kubectl replace --help"
+                ]
+            }
+        }
         
     def load_questions(self) -> List[Dict]:
         """Load kubectl command questions organized by difficulty and topic"""
@@ -493,6 +694,20 @@ class KubectlQuiz:
         if "alternatives" in question:
             print(f"Alternative answers: {', '.join(question['alternatives'])}")
         print(f"Explanation: {question['explanation']}")
+
+    def show_improvement_tips(self, category: str) -> None:
+        """Show improvement tips for a specific category"""
+        if category in self.improvement_tips:
+            tips_data = self.improvement_tips[category]
+            print(f"\n{'='*60}")
+            print(f" Tips to improve in {category}:")
+            print(f"{'='*60}")
+            for i, tip in enumerate(tips_data["tips"], 1):
+                print(f"  {i}. {tip}")
+            print(f"\nHelpful resources:")
+            for resource in tips_data["resources"]:
+                print(f"  - {resource}")
+            print(f"{'='*60}")
     
     def run_quiz(self, num_questions: int = 10, category: str = None, difficulty: str = None) -> None:
         """Run an interactive quiz session"""
@@ -530,8 +745,11 @@ class KubectlQuiz:
                     self.session_history.append({
                         "question": question["question"],
                         "user_answer": "SKIPPED",
-                        "correct": False
+                        "correct": False,
+                        "category": question["category"],
+                        "difficulty": question["difficulty"]
                     })
+                    self.show_improvement_tips(question["category"])
                     break
                 
                 elif user_input.lower() == 'hint':
@@ -545,17 +763,23 @@ class KubectlQuiz:
                         self.session_history.append({
                             "question": question["question"],
                             "user_answer": user_input,
-                            "correct": True
+                            "correct": True,
+                            "category": question["category"],
+                            "difficulty": question["difficulty"]
                         })
+                        self.show_explanation(question)
                     else:
                         print("\n❌ Incorrect!")
                         self.session_history.append({
                             "question": question["question"],
                             "user_answer": user_input,
-                            "correct": False
+                            "correct": False,
+                            "category": question["category"],
+                            "difficulty": question["difficulty"]
                         })
-                    
-                    self.show_explanation(question)
+                        self.show_explanation(question)
+                        self.show_improvement_tips(question["category"])
+
                     answered = True
             
             self.total_questions += 1
@@ -566,42 +790,122 @@ class KubectlQuiz:
     def show_results(self) -> None:
         """Display quiz results"""
         print("\n" + "="*60)
-        print(" Quiz Results")
+        print(" QUIZ RESULTS - FULL SCORE REPORT")
         print("="*60)
-        
+
         if self.total_questions > 0:
             percentage = (self.score / self.total_questions) * 100
-            print(f"\nFinal Score: {self.score}/{self.total_questions} ({percentage:.1f}%)")
-            
+            print(f"\n{'='*60}")
+            print(f" FINAL SCORE: {self.score}/{self.total_questions} ({percentage:.1f}%)")
+            print(f"{'='*60}")
+
             # Show performance by category
             category_stats = {}
+            difficulty_stats = {"Basic": {"correct": 0, "total": 0},
+                               "Intermediate": {"correct": 0, "total": 0},
+                               "Advanced": {"correct": 0, "total": 0}}
+            incorrect_categories = []
+
             for item in self.session_history:
-                # Find the question to get its category
-                for q in self.questions:
-                    if q["question"] == item["question"]:
-                        cat = q["category"]
-                        if cat not in category_stats:
-                            category_stats[cat] = {"correct": 0, "total": 0}
-                        category_stats[cat]["total"] += 1
-                        if item["correct"]:
-                            category_stats[cat]["correct"] += 1
-                        break
-            
+                cat = item.get("category", "Unknown")
+                diff = item.get("difficulty", "Unknown")
+
+                if cat not in category_stats:
+                    category_stats[cat] = {"correct": 0, "total": 0, "questions": []}
+                category_stats[cat]["total"] += 1
+                category_stats[cat]["questions"].append(item)
+
+                if diff in difficulty_stats:
+                    difficulty_stats[diff]["total"] += 1
+
+                if item["correct"]:
+                    category_stats[cat]["correct"] += 1
+                    if diff in difficulty_stats:
+                        difficulty_stats[diff]["correct"] += 1
+                else:
+                    if cat not in incorrect_categories:
+                        incorrect_categories.append(cat)
+
+            # Performance by Category
             if category_stats:
-                print("\nPerformance by Category:")
-                for cat, stats in category_stats.items():
+                print("\n PERFORMANCE BY CATEGORY:")
+                print("-"*60)
+                sorted_categories = sorted(category_stats.items(),
+                                          key=lambda x: x[1]["correct"]/x[1]["total"] if x[1]["total"] > 0 else 0)
+                for cat, stats in sorted_categories:
                     cat_percentage = (stats["correct"] / stats["total"]) * 100
-                    print(f"  {cat}: {stats['correct']}/{stats['total']} ({cat_percentage:.1f}%)")
-            
-            # Provide feedback
+                    bar_length = int(cat_percentage / 5)
+                    bar = "█" * bar_length + "░" * (20 - bar_length)
+                    status = "✅" if cat_percentage >= 70 else "⚠️" if cat_percentage >= 50 else "❌"
+                    print(f"  {status} {cat:20} {bar} {stats['correct']}/{stats['total']} ({cat_percentage:.1f}%)")
+
+            # Performance by Difficulty
+            print("\n PERFORMANCE BY DIFFICULTY:")
+            print("-"*60)
+            for diff in ["Basic", "Intermediate", "Advanced"]:
+                if difficulty_stats[diff]["total"] > 0:
+                    diff_percentage = (difficulty_stats[diff]["correct"] / difficulty_stats[diff]["total"]) * 100
+                    bar_length = int(diff_percentage / 5)
+                    bar = "█" * bar_length + "░" * (20 - bar_length)
+                    status = "✅" if diff_percentage >= 70 else "⚠️" if diff_percentage >= 50 else "❌"
+                    print(f"  {status} {diff:20} {bar} {difficulty_stats[diff]['correct']}/{difficulty_stats[diff]['total']} ({diff_percentage:.1f}%)")
+
+            # Detailed Question Review
+            print("\n QUESTION-BY-QUESTION REVIEW:")
+            print("-"*60)
+            for i, item in enumerate(self.session_history, 1):
+                status = "✅" if item["correct"] else "❌" if item["user_answer"] != "SKIPPED" else "⏭️"
+                print(f"\n  Q{i}. {item['question'][:50]}...")
+                print(f"      Status: {status} | Category: {item.get('category', 'N/A')} | Difficulty: {item.get('difficulty', 'N/A')}")
+                if not item["correct"]:
+                    print(f"      Your answer: {item['user_answer']}")
+
+            # Areas needing improvement
+            if incorrect_categories:
+                print("\n AREAS NEEDING IMPROVEMENT:")
+                print("-"*60)
+                for cat in incorrect_categories:
+                    if cat in category_stats:
+                        wrong_count = category_stats[cat]["total"] - category_stats[cat]["correct"]
+                        print(f"  - {cat}: {wrong_count} question(s) incorrect")
+
+                print("\n RECOMMENDED STUDY PLAN:")
+                print("-"*60)
+                # Get categories with worst performance
+                worst_categories = sorted(
+                    [(cat, stats["correct"]/stats["total"]) for cat, stats in category_stats.items()],
+                    key=lambda x: x[1]
+                )[:3]
+
+                for i, (cat, score) in enumerate(worst_categories, 1):
+                    if score < 1.0:  # Only show if there were mistakes
+                        print(f"\n  {i}. Focus on: {cat}")
+                        if cat in self.improvement_tips:
+                            tips = self.improvement_tips[cat]["tips"][:2]
+                            for tip in tips:
+                                print(f"     - {tip}")
+
+            # Overall feedback
+            print(f"\n{'='*60}")
+            print(" OVERALL ASSESSMENT:")
+            print(f"{'='*60}")
             if percentage >= 90:
-                print("\n🏆 Excellent! You're well-prepared for the CKA exam!")
+                print("\n🏆 EXCELLENT! You're well-prepared for the CKA exam!")
+                print("   Your command of kubectl is impressive. Focus on edge cases.")
             elif percentage >= 70:
-                print("\n👍 Good job! Keep practicing to improve further.")
+                print("\n👍 GOOD JOB! You have a solid foundation.")
+                print("   Keep practicing the areas where you struggled.")
             elif percentage >= 50:
-                print("\n📚 You're making progress. Review the explanations and practice more.")
+                print("\n📚 MAKING PROGRESS! You're on the right track.")
+                print("   Spend more time on the categories listed above.")
             else:
-                print("\n💪 Keep practicing! Focus on understanding the command structure.")
+                print("\n💪 KEEP PRACTICING! Focus on the fundamentals.")
+                print("   Review kubectl documentation and practice daily.")
+
+            # Time and date stamp
+            print(f"\n{'='*60}")
+            print(f" Quiz completed at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+            print(f"{'='*60}")
     
     def list_categories(self) -> None:
         """List all available categories"""
