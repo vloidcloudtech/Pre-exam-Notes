@@ -727,18 +727,21 @@ class KubectlQuiz:
             asked_questions.append(question)
             
             self.display_question(question)
-            
+
             hint_count = 0
             answered = False
-            
+            attempts = 0
+            max_attempts = 2
+            last_answer = ""
+
             while not answered:
                 user_input = input("\nYour answer: ").strip()
-                
+
                 if user_input.lower() == 'quit':
                     print("\nQuitting quiz...")
                     self.show_results()
                     return
-                
+
                 elif user_input.lower() == 'skip':
                     print("\nSkipping question...")
                     self.show_explanation(question)
@@ -746,17 +749,19 @@ class KubectlQuiz:
                         "question": question["question"],
                         "user_answer": "SKIPPED",
                         "correct": False,
+                        "correct_answer": question["answer"],
                         "category": question["category"],
                         "difficulty": question["difficulty"]
                     })
                     self.show_improvement_tips(question["category"])
                     break
-                
+
                 elif user_input.lower() == 'hint':
                     self.show_hint(question, hint_count)
                     hint_count += 1
-                
+
                 else:
+                    last_answer = user_input
                     if self.check_answer(user_input, question):
                         print("\n✅ Correct!")
                         self.score += 1
@@ -764,23 +769,30 @@ class KubectlQuiz:
                             "question": question["question"],
                             "user_answer": user_input,
                             "correct": True,
+                            "correct_answer": question["answer"],
                             "category": question["category"],
                             "difficulty": question["difficulty"]
                         })
                         self.show_explanation(question)
+                        answered = True
                     else:
-                        print("\n❌ Incorrect!")
-                        self.session_history.append({
-                            "question": question["question"],
-                            "user_answer": user_input,
-                            "correct": False,
-                            "category": question["category"],
-                            "difficulty": question["difficulty"]
-                        })
-                        self.show_explanation(question)
-                        self.show_improvement_tips(question["category"])
-
-                    answered = True
+                        attempts += 1
+                        if attempts < max_attempts:
+                            print(f"\n❌ Incorrect! You have {max_attempts - attempts} try left.")
+                            print("Try again or type 'hint' for a hint, 'skip' to skip.")
+                        else:
+                            print("\n❌ Incorrect!")
+                            self.session_history.append({
+                                "question": question["question"],
+                                "user_answer": last_answer,
+                                "correct": False,
+                                "correct_answer": question["answer"],
+                                "category": question["category"],
+                                "difficulty": question["difficulty"]
+                            })
+                            self.show_explanation(question)
+                            self.show_improvement_tips(question["category"])
+                            answered = True
             
             self.total_questions += 1
             print(f"\nProgress: {i+1}/{num_questions} | Score: {self.score}/{self.total_questions}")
@@ -859,6 +871,7 @@ class KubectlQuiz:
                 print(f"      Status: {status} | Category: {item.get('category', 'N/A')} | Difficulty: {item.get('difficulty', 'N/A')}")
                 if not item["correct"]:
                     print(f"      Your answer: {item['user_answer']}")
+                    print(f"      Correct answer: {item.get('correct_answer', 'N/A')}")
 
             # Areas needing improvement
             if incorrect_categories:
