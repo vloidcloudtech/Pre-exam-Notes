@@ -1,5 +1,12 @@
 # Studying for the CKA, I first went through KodeKloud's course, then I went directly into these resources. I used killerkoda to lab the questions. You can either pay, or use the free playground, there is no difference tbh.
 
+
+
+
+# The reddit is the biggest key for these exams. Please use it.
+
+
+
 # https://killercoda.com/
 
 # Kodekloud course ( https://learn.kodekloud.com/user/courses/cka-certification-course-certified-kubernetes-administrator?refererPath=%2Fuser%2Flearning-paths%2Fkubestronaut&refererTitle=Kubestronaut ) 
