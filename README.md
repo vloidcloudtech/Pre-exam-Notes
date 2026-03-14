@@ -1,5 +1,5 @@
 # This is a directory of the notes I have taken throughout most of my certification Exams
-
+# https://www.youtube.com/channel/UCXTzf1tVMXaidf_tf9zeCnQ/
 
 ## FYI: My overall study method is physically writing notes, but I will fill out the exam objectives before an exam IF needed. Which is why there are some guides that aren't filled in.
 
