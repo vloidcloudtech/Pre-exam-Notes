@@ -10,7 +10,6 @@
 # KillerCoda https://killercoda.com/
 
 # Kodekloud course ( https://learn.kodekloud.com/user/courses/cka-certification-course-certified-kubernetes-administrator?refererPath=%2Fuser%2Flearning-paths%2Fkubestronaut&refererTitle=Kubestronaut ) 
-# github repo (https://github.com/vj2201/CKA-PREP-2025-v2)
 # Youtube playlist for repo (https://youtube.com/playlist?list=PLvZb3tGyqC1TOasSaN36haM5xlCxHQBlA&si=VsaTGMLOupiwY8Re)
 # Another YouTube playlist ( https://youtube.com/playlist?list=PLkDZsCgo3Isr4NB5cmyqG7OZwYEx5XOjM&si=LX0L8YjgduYf3_8y)
 # Reddit (https://www.reddit.com/r/CKAExam/) 
