@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maria-deployment
+  namespace: mariadb
+  labels:
+    app: maria-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: maria-deployment
+  template:
+    metadata:
+      labels:
+        app: maria-deployment
+    spec:
+      containers:
+      - name: mariadb
+        image: mariadb:10.5
+        volumeMounts:
+        - name: mariadb-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mariadb-storage
+        persistentVolumeClaim:
+          claimName: mariadb
